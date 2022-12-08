@@ -10,7 +10,11 @@ Use the package manager npm i and npm run start to install packages
 
 ## Road Map
 
-[ERD]("https://app.diagrams.net/?libs=general;er") and [Hierarchy Diagram]("https://app.diagrams.net/?libs=general")
+[ERD]("https://app.diagrams.net/?libs=general;er")
+
+[Hierarchy Diagram]("https://app.diagrams.net/?libs=general")
+
+[Trello]("https://trello.com/invite/b/hFdRkHJU/ATTI1fd78af0d2bc162e80731da7d4cc839d18C7F8CA/noble-bounty")
 
 ## Contributing
 
