@@ -1,8 +1,13 @@
 import React from 'react'
 
-const CustomerCard = () => {
+const CustomerCard = (props) => {
   return (
-    <div>CustomerCard</div>
+    <div className='customer-card'>
+      <div className='customer-info'>
+        <h3 className='name-display'> Customer Name: {props.name}</h3>
+        <button onClick={props.onClick}>View Orders</button>
+        </div>
+        </div>
   )
 }
 
