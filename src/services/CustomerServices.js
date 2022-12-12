@@ -1,6 +1,6 @@
 import Client from './api'
 
-export const GetCustomers = async () => {
+export const GetAllCustomers = async () => {
   try {
     const res = await Client.get('/customers')
     return res.data
