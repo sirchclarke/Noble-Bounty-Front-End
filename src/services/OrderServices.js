@@ -17,6 +17,14 @@ export const GetOrderById = async (id) => {
     throw error
   }
 }
+export const CreateOrder = async (data) => {
+  try {
+    const res = await Client.post(`/orders/addOrder`, data)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
 
 export const AddOrder = async (data) => {
   try {
