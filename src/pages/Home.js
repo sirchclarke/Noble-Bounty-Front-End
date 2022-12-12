@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-const Home = ({ user, authenticated, convertGrade }) => {
+const Home = ({ user, authenticated }) => {
   let navigate = useNavigate()
   return (
     <div className="home-container col">
@@ -11,7 +11,7 @@ const Home = ({ user, authenticated, convertGrade }) => {
       ) : (
         <div>
           <h1 className="welcome-message">Welcome</h1>
-          <h3>Register or Sign-In to view your courses and grades</h3>
+          <h3>Register or Sign-In to view your Orders and Pickups</h3>
           <section className="welcome-signin">
             <button onClick={() => navigate('/login')}>
               {' '}

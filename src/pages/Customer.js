@@ -2,14 +2,14 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import CustomerCard from '../components/CustomerCard'
-import { GetCustomers } from '../services/CustomerServices'
+import { GetAllCustomers } from '../services/CustomerServices'
 
 const Customer = ({ authenticated, user }) => {
   const [customers, setCustomers] = useState([null])
   let navigate = useNavigate()
 
   const getCustomers = async () => {
-    const data = await GetCustomers()
+    const data = await GetAllCustomers()
     setCustomers(data)
   }
   useEffect(() => {

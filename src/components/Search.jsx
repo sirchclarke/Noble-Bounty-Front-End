@@ -1,5 +1,5 @@
 import useState from 'react'
-import { GetOrder } from "../services/OrderServices"
+import { GetOrderById } from "../services/OrderServices"
 
 const Search = ({ user, authenticated}) => {
   const initialState = {
@@ -17,7 +17,7 @@ const handleChange = (e) => {
 const onSubmit = async (e) => {
   e.preventDefault()
   console.log(formState)
-  const result = await GetOrder(formState)
+  const result = await GetOrderById(formState)
   setFormState(initialState)
   setOrder(result)
   setSearched(true)
