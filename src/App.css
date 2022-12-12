@@ -1,38 +1,197 @@
-.App {
-  text-align: center;
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+button {
+  border: 0;
+  cursor: pointer;
+  padding: 1em 1.5em;
+  font-size: 1.1rem;
+  margin: 1em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+header {
+  height: 3em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+nav {
+  text-decoration: none; 
+  color: black;
+  margin-right: 1em;
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 1.2em;
+}
+
+nav a,
+nav h3 {
+  text-decoration: none; 
+  color: black;
+  margin: auto 1em;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-weight: 800;
+  transition: all 0.2s ease;
+}
+
+main {
+  min-height: calc(100vh - 4em);
+}
+
+.col {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.home-container,
+.signin {
+  min-height: calc(100vh - 4em);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color:#091e00;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-overlay {
+  border: 2px solid;
+  width: 60%;
+  padding: 1em;
+  box-shadow: 2px 0px 30px rgba(0, 0, 0, 0.3);
+}
+
+form,
+.input-wrapper {
+  margin: auto;
+  width: 80%;
+}
+
+form label {
+  align-self: flex-start;
+}
+
+.input-wrapper {
+  width: 80%;
+  margin: 0;
+  padding: 0;
+}
+
+.input-wrapper input {
+  padding: 0.6em 1.2em;
+  margin: 0.5em auto;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+input::placeholder {
+  opacity: 0.5;
+}
+
+.course-container {
+  cursor:pointer;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  text-align: center;
+}
+
+ .card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr,;
+
+}
+
+.customers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  flex-direction: column;
+}
+
+.customer-card, .order-card {
+  margin: 25px;
+  padding: 10px;
+  border: 1px solid black;
+  box-shadow: 2px 0px 30px rgba(0, 0, 0, 0.3);
+}
+
+.customer-info {
+  text-align: center;
+}
+
+.details-header {
+  font-size: x-large;
+  text-align: center;
+  font-weight: 600;
+}
+
+.customers-list {
+    text-decoration: underline;
+    font-style: italic;
+    text-align: center
+}
+
+.class-name{
+  font-size: large;
+  text-align: center;
+}
+
+.search {
+  text-align: center;
+}
+
+input {
+  padding: 10px;
+  margin: 5px;
+}
+
+.search-result {
+  text-align: center;
+  font-size: xx-large;
+  padding: 50px;
+}
+
+.transcript-container {
+  border: 2px solid black;
+  padding: 20px;
+  box-shadow: 2px 0px 30px rgba(0, 0, 0, 0.3);
+  margin: 50px;
+}
+
+.welcome {
+  font-size: 40px;
+}
+
+.order-name-pickup {
+  border: 1px dashed black;
+  margin: 3px;
+  padding: 10px;
+}
+
+.display {
+  text-align: center;
+  font-weight: bolder;
+}
+
+h2 {
+  text-align: center;
+}
+
+.order-customers{
+  text-align: center;
+  margin: 20px 150px 20px 150px;
+  border: 2px solid black;
+  box-shadow: 2px 0px 30px rgba(0, 0, 0, 0.3);
+}
+
+.order-customer-name{
+  font-size: larger;
+  font-weight: bolder;;
 }
