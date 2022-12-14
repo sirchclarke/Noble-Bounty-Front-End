@@ -29,7 +29,8 @@ const Orders = ({ user, authenticated }) => {
             <OrderCard
               key={order?.id}
               id={order?.customer_name}
-              customer_address={order?.customer_address}
+              date={order?.order_date}
+              address={order?.customer_address}
               order_type={order?.item_type}
               item_image={order?.item_image}
               viewOnClick={() => viewDetails(order?.id)}

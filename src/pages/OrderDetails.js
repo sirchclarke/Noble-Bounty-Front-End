@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { GetOrderById } from '../services/OrderServices'
 import { useParams, useNavigate } from 'react-router-dom'
 import { UpdatePickup } from '../services/PickupServices'
+import Orders from './Orders'
 
 const OrderDetails = ({ user, authenticated }) => {
   let { id } = useParams()
@@ -32,7 +33,6 @@ const OrderDetails = ({ user, authenticated }) => {
     setPickups()
   }
   const onClick = (id) => {
-    console.log(id)
     setCustomerToEdit(id)
   }
   useEffect(() => {
@@ -46,8 +46,9 @@ const OrderDetails = ({ user, authenticated }) => {
           <p className="details-header">Order Details</p>
 
           <div className="order-customers" key={customers?.id}>
-            <p className="order-customer-name">{customers?.customer_address}</p>
-            <p className="order-customer-name">{customers?.item_type}</p>
+            <p className="order-customers">{customers?.customer_address}</p>
+            <p className="order-customers">{customers?.item_type}</p>
+            <p className="order-customers">{customers?.pickup_date}</p>
             {/* <p>{pickups?.pickup_date}</p> */}
             {customerToEdit === customers?.id ? (
               <form
