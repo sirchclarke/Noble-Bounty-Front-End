@@ -27,6 +27,7 @@ const Customer = ({ authenticated, user }) => {
                 <CustomerCard
                   name={customer?.customer_name}
                   address={customer?.customer_address}
+                  email={customer?.customer_email}
                   //   onClick={() => viewTranscript(student?.id)}
                 />
               </div>
