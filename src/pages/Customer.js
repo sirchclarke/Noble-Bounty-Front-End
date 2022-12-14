@@ -10,11 +10,12 @@ const Customer = ({ authenticated, user }) => {
 
   const getCustomers = async () => {
     const data = await GetAllCustomers()
+    console.log(data)
     setCustomers(data)
   }
   useEffect(() => {
     getCustomers()
-  }, [customers])
+  }, [])
 
   return (
     <div>
@@ -22,11 +23,12 @@ const Customer = ({ authenticated, user }) => {
         <div className="customer-information">
           <div className="customers">
             {customers?.map((customer) => (
-              <CustomerCard
-                key={customer?.id}
-                name={customer?.name}
-                //   onClick={() => viewTranscript(student?.id)}
-              />
+              <div key={customer?.id}>
+                <CustomerCard
+                  name={customer?.customer_name}
+                  //   onClick={() => viewTranscript(student?.id)}
+                />
+              </div>
             ))}
           </div>
         </div>

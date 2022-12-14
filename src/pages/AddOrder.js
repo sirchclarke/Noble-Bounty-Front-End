@@ -4,20 +4,36 @@ import { CreateOrder } from '../services/OrderServices'
 
 const AddOrder = ({ user, authenticated }) => {
   let navigate = useNavigate()
-
-  const initialState = {
-    name: ''
-  }
-  const [formState, setFormState] = useState(initialState)
+  const [formValues, setFormValues] = useState({
+    customer_name: '',
+    customer_id: user.id,
+    order_date: '',
+    item_type: '',
+    item_image: ''
+  })
 
   const handleChange = (e) => {
-    setFormState({ ...formState, [e.target.id]: e.target.value })
+    setFormValues({ ...formValues, [e.target.id]: e.target.value })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const newOrder = await CreateOrder(formState)
-    setFormState(initialState)
+    await CreateOrder({
+      customer_name: formValues.customer_name,
+      customer_id: formValues.customer_id,
+      order_date: formValues.customer_date,
+      item_type: formValues.item_type,
+      item_image: formValues.item_image
+    })
+    setFormValues({
+      customer_name: '',
+      customer_id: '',
+      order_date: '',
+      item_type: '',
+      item_image: ''
+    })
+    // const newOrder = await CreateOrder(formState)
+    // setFormState(initialState)
     navigate(`/orders`)
   }
 
@@ -34,12 +50,55 @@ const AddOrder = ({ user, authenticated }) => {
               <input
                 className="input"
                 type="text"
-                id="name"
-                placeholder="Order Name"
+                id="customer_name"
+                placeholder="Customer Name"
                 image="image"
                 cols="30"
                 onChange={handleChange}
-                value={formState.name}
+                value={formValues.customer_name}
+                required
+              />
+
+              <label className="label orderField" htmlFor="orderDate">
+                Order Date:
+              </label>
+              <input
+                className="input"
+                type="date"
+                id="order_date"
+                placeholder="Order Date"
+                image="image"
+                cols="30"
+                onChange={handleChange}
+                value={formValues.order_date}
+                required
+              />
+              <label className="label orderField" htmlFor="item_type">
+                Item Type:
+              </label>
+              <input
+                className="input"
+                type="text"
+                id="item_type"
+                placeholder="Item Type"
+                image="image"
+                cols="30"
+                onChange={handleChange}
+                value={formValues.item_type}
+                required
+              />
+              <label className="label orderField" htmlFor="item_image">
+                Item Image:
+              </label>
+              <input
+                className="input"
+                type="text"
+                id="item_image"
+                placeholder="Item Image"
+                image="image"
+                cols="30"
+                onChange={handleChange}
+                value={formValues.item_image}
                 required
               />
               <button className="create-order-button" type="submit">

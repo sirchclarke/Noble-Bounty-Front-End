@@ -10,6 +10,7 @@ import Search from './components/Search'
 import Orders from './pages/Orders'
 import Customer from './pages/Customer'
 import AddOrder from './pages/AddOrder'
+import OrderDetails from './pages/OrderDetails'
 
 function App() {
   const [authenticated, toggleAuthenticated] = useState(false)
@@ -72,13 +73,13 @@ function App() {
             element={<Customer user={user} authenticated={authenticated} />}
           />
           <Route
-            path="/orders"
+            path="/add-order"
             element={<AddOrder user={user} authenticated={authenticated} />}
           />
-          {/* <Route
+          <Route
             path="/orders/:id"
             element={<OrderDetails user={user} authenticated={authenticated} />}
-          /> */}
+          />
         </Routes>
       </main>
     </div>

@@ -1,10 +1,10 @@
-import useState from 'react'
+import {useState} from 'react'
 import { GetOrderById } from "../services/OrderServices"
 
 const Search = ({ user, authenticated}) => {
   const initialState = {
-  customerId: '',
-  orderId: ''
+  customer_id: '',
+  order_id: ''
 }
 const [formState, setFormState] = useState(initialState)
 const [ setOrder] = useState(null)
@@ -22,6 +22,7 @@ const onSubmit = async (e) => {
   setOrder(result)
   setSearched(true)
 }
+return(
     <div>
 
   {authenticated && user ? (
@@ -32,15 +33,15 @@ const onSubmit = async (e) => {
 
         <input
             type="text"
-            id="customerId"
-            value={formState.customerId}
+            id="customer_id"
+            value={formState.customer_id}
             placeholder="Customer ID"
             onChange={handleChange}
         ></input>
         <input
             type="text"
-            id="orderId"
-            value={formState.orderId}
+            id="order_id"
+            value={formState.order_id}
             placeholder="Order ID"
             onChange={handleChange}
         ></input>
@@ -61,7 +62,7 @@ const onSubmit = async (e) => {
 
 
 
-
+)
 }
 
 export default Search

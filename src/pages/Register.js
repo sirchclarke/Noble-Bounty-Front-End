@@ -5,8 +5,9 @@ import { RegisterUser } from '../services/AuthServices'
 const Register = ({ setUser, toggleAuthenticated }) => {
   let navigate = useNavigate()
   const [formValues, setFormValues] = useState({
-    name: '',
-    email: '',
+    customer_name: '',
+    customer_address: '',
+    customer_email: '',
     password: '',
     confirmPassword: ''
   })
@@ -18,13 +19,15 @@ const Register = ({ setUser, toggleAuthenticated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     await RegisterUser({
-      name: formValues.name,
-      email: formValues.email,
-      password: formValues.password
+      customer_name: formValues.customer_name,
+      customer_address: formValues.customer_address,
+      customer_email: formValues.customer_email,
+      customer_password: formValues.password
     })
     setFormValues({
-      name: '',
-      email: '',
+      customer_name: '',
+      customer_address: '',
+      customer_email: '',
       password: '',
       confirmPassword: ''
     })
@@ -36,24 +39,35 @@ const Register = ({ setUser, toggleAuthenticated }) => {
       <div className="card-overlay centered">
         <form className="col" onSubmit={handleSubmit}>
           <div className="input-wrapper">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="customer_name">Name</label>
             <input
               onChange={handleChange}
-              name="name"
+              name="customer_name"
               type="text"
               placeholder="Amy Adams"
-              value={formValues.name}
+              value={formValues.customer_name}
               required
             />
           </div>
           <div className="input-wrapper">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="customer_address">Address</label>
             <input
               onChange={handleChange}
-              name="email"
+              name="customer_address"
+              type="text"
+              placeholder="1011 sunny side Harlingen, Texas"
+              value={formValues.customer_address}
+            />
+          </div>
+
+          <div className="input-wrapper">
+            <label htmlFor="customer_email">Email</label>
+            <input
+              onChange={handleChange}
+              name="customer_email"
               type="email"
               placeholder="example@example.com"
-              value={formValues.email}
+              value={formValues.customer_email}
               required
             />
           </div>
@@ -81,7 +95,7 @@ const Register = ({ setUser, toggleAuthenticated }) => {
           <button
             className="button"
             disabled={
-              !formValues.email ||
+              !formValues.customer_email ||
               (!formValues.password &&
                 formValues.confirmPassword === formValues.password)
             }

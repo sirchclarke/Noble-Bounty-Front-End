@@ -1,13 +1,14 @@
 import React from 'react'
-import Orders from "../pages/Orders"
 
-const OrderCard = (props) => {
+
+const OrderCard = ({id,order_type,viewOnClick}) => {
   return(
     <div className= "order-card" >
         <div className= "order-info">
-            <h3 className="name-display">Order Name: {props.name}</h3>
+            <h3 className="name-display">Order Name: {id}</h3>
+            <h3 className="name-display">Item type: {order_type}</h3>
      
-            <button onClick={props.viewOnClick}>View order details</button>
+            <button onClick={viewOnClick}>View order details</button>
         </div>
     </div>
 )

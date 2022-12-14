@@ -10,11 +10,12 @@ const Orders = ({ user, authenticated }) => {
   const showAllOrders = async () => {
     const data = await GetAllOrders()
     setOrders(data)
+    console.log(data)
   }
 
   useEffect(() => {
     showAllOrders()
-  }, [orders])
+  }, [])
 
   const viewDetails = (id) => {
     navigate(`/orders/${id}`)
@@ -24,12 +25,13 @@ const Orders = ({ user, authenticated }) => {
     <div>
       {authenticated && user ? (
         <div className="order-container">
-          {orders.map((order) => (
+          {orders?.map((order) => (
             <OrderCard
-              key={order.id}
-              name={order.name}
-              orderId={order.id}
-              viewOnClick={() => viewDetails(order.id)}
+              key={order?.id}
+              id={order?.customer_id}
+              //   name={order}
+              order_type={order?.item_type}
+              viewOnClick={() => viewDetails(order?.id)}
             />
           ))}
         </div>

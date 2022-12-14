@@ -4,7 +4,10 @@ import { useNavigate } from 'react-router-dom'
 
 const LogIn = ({ setUser, toggleAuthenticated, user }) => {
   let navigate = useNavigate()
-  const [formValues, setFormValues] = useState({ email: '', password: '' })
+  const [formValues, setFormValues] = useState({
+    customer_email: '',
+    customer_password: ''
+  })
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
@@ -12,8 +15,9 @@ const LogIn = ({ setUser, toggleAuthenticated, user }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log(formValues)
     const payload = await SignInUser(formValues)
-    setFormValues({ email: '', password: '' })
+    setFormValues({ customer_email: '', customer_password: '' })
     setUser(payload)
     toggleAuthenticated(true)
     navigate(`/`)
@@ -27,10 +31,10 @@ const LogIn = ({ setUser, toggleAuthenticated, user }) => {
             <label htmlFor="email">Email</label>
             <input
               onChange={handleChange}
-              name="email"
+              name="customer_email"
               type="email"
               placeholder="example@example.com"
-              value={formValues.email}
+              value={formValues.customer_email}
               required
             />
           </div>
@@ -39,12 +43,16 @@ const LogIn = ({ setUser, toggleAuthenticated, user }) => {
             <input
               onChange={handleChange}
               type="password"
-              name="password"
-              value={formValues.password}
+              name="customer_password"
+              value={formValues.customer_password}
               required
             />
           </div>
-          <button disabled={!formValues.email || !formValues.password}>
+          <button
+            disabled={
+              !formValues.customer_email || !formValues.customer_password
+            }
+          >
             Sign In
           </button>
         </form>
