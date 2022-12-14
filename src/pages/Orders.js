@@ -28,9 +28,10 @@ const Orders = ({ user, authenticated }) => {
           {orders?.map((order) => (
             <OrderCard
               key={order?.id}
-              id={order?.customer_id}
-              //   name={order}
+              id={order?.customer_name}
+              customer_address={order?.customer_address}
               order_type={order?.item_type}
+              item_image={order?.item_image}
               viewOnClick={() => viewDetails(order?.id)}
             />
           ))}

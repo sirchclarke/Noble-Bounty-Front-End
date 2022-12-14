@@ -11,6 +11,7 @@ import Orders from './pages/Orders'
 import Customer from './pages/Customer'
 import AddOrder from './pages/AddOrder'
 import OrderDetails from './pages/OrderDetails'
+import Footer from './components/Footer'
 
 function App() {
   const [authenticated, toggleAuthenticated] = useState(false)
@@ -48,7 +49,14 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Home user={user} authenticated={authenticated} />}
+            element={
+              <Home
+                user={user}
+                setUser={setUser}
+                toggleAuthenticated={toggleAuthenticated}
+                authenticated={authenticated}
+              />
+            }
           />
           <Route
             path="/login"
@@ -82,6 +90,9 @@ function App() {
           />
         </Routes>
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   )
 }

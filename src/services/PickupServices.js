@@ -9,12 +9,17 @@ export const GetPickup = async ({ orderId, customerId }) => {
   }
 }
 
-export const UpdatePickup = async ({ orderId, customerId, pickup }) => {
+export const UpdatePickup = async ({
+  orderId,
+  customerId,
+  pickup,
+  pickupId
+}) => {
   try {
     console.log(`orderId ${orderId}`)
     console.log(`customerId ${customerId}`)
     console.log(`pickup ${pickup}`)
-    const res = await Client.put(`/pickup/${orderId}/${customerId}`, {
+    const res = await Client.put(`/pickup/${pickupId}`, {
       pickup: pickup
     })
     return res.data

@@ -1,6 +1,20 @@
 import { useNavigate } from 'react-router-dom'
+import { CheckSession } from '../services/AuthServices'
+import { useEffect } from 'react'
 
-const Home = ({ user, authenticated }) => {
+const Home = ({ user, authenticated, setUser, toggleAuthenticated }) => {
+  const checkToken = async () => {
+    const user = await CheckSession()
+    setUser(user)
+    toggleAuthenticated(true)
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      checkToken()
+    }
+  }, [])
   let navigate = useNavigate()
   return (
     <div className="home-container col">

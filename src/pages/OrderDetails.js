@@ -12,7 +12,8 @@ const OrderDetails = ({ user, authenticated }) => {
     pickup: ''
   }
   const [formState, setFormState] = useState(initialState)
-  const [customers, setCustomers] = useState(null)
+  const [customers, setCustomers] = useState({})
+  const [pickups, setPickups] = useState(null)
   const [customerToEdit, setCustomerToEdit] = useState()
 
   const handleChange = (e) => {
@@ -24,10 +25,11 @@ const OrderDetails = ({ user, authenticated }) => {
   }
   const handleSubmit = async (e, id) => {
     e.preventDefault()
-    await UpdatePickup({ ...formState, customerId: id })
+    await UpdatePickup({ ...formState, pickupId: id })
     setFormState(initialState)
     setCustomerToEdit(null)
     getCustomerInOrder()
+    setPickups()
   }
   const onClick = (id) => {
     console.log(id)
@@ -35,7 +37,7 @@ const OrderDetails = ({ user, authenticated }) => {
   }
   useEffect(() => {
     getCustomerInOrder()
-  })
+  }, [])
 
   return (
     <div>
@@ -43,35 +45,34 @@ const OrderDetails = ({ user, authenticated }) => {
         <div>
           <p className="details-header">Order Details</p>
 
-          {customers.customers?.map((customer) => (
-            <div className="order-customers" key={customer.id}>
-              <p className="order-customer-name">{customer.name}</p>
-              <p>{customer.Pickup.pickup}</p>
-              {customerToEdit === customer.id ? (
-                <form
-                  className="form"
-                  onSubmit={(e) => handleSubmit(e, customer.id)}
-                >
-                  <input
-                    className="input"
-                    type="date"
-                    id="pickup_date"
-                    placeholder="Pickup Date"
-                    onChange={(e) => handleChange(e)}
-                    value={formState.pickup}
-                    // required
-                  />
-                  <button className="create-order-button" type="submit">
-                    Update Pickup
-                  </button>
-                </form>
-              ) : (
-                <button onClick={() => onClick(customer.id)}>
+          <div className="order-customers" key={customers?.id}>
+            <p className="order-customer-name">{customers?.customer_address}</p>
+            <p className="order-customer-name">{customers?.item_type}</p>
+            {/* <p>{pickups?.pickup_date}</p> */}
+            {customerToEdit === customers?.id ? (
+              <form
+                className="form"
+                onSubmit={(e) => handleSubmit(e, customers.id)}
+              >
+                <input
+                  className="input"
+                  type="date"
+                  id="pickup_date"
+                  placeholder="Pickup Date"
+                  onChange={(e) => handleChange(e)}
+                  value={formState.pickupId}
+                  // required
+                />
+                <button className="create-order-button" type="submit">
                   Update Pickup
                 </button>
-              )}
-            </div>
-          ))}
+              </form>
+            ) : (
+              <button onClick={() => onClick(customers.id)}>
+                Update Pickup
+              </button>
+            )}
+          </div>
         </div>
       ) : (
         <div className="home-container col">

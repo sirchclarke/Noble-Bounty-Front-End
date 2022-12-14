@@ -15,12 +15,13 @@ const LogIn = ({ setUser, toggleAuthenticated, user }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(formValues)
+
     const payload = await SignInUser(formValues)
     setFormValues({ customer_email: '', customer_password: '' })
     setUser(payload)
     toggleAuthenticated(true)
-    navigate(`/`)
+
+    navigate('/')
   }
 
   return (
