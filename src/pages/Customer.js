@@ -2,12 +2,20 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import CustomerCard from '../components/CustomerCard'
+import PickupCard from '../components/PickupCard'
 import { GetAllCustomers } from '../services/CustomerServices'
+import { GetPickup } from '../services/PickupServices'
 
 const Customer = ({ authenticated, user }) => {
   const [customers, setCustomers] = useState([null])
+  const [pickup, setPickup] = useState([null])
   let navigate = useNavigate()
 
+  const getOrderPickup = async () => {
+    const data = await GetPickup()
+    console.log(data)
+    setPickup(data)
+  }
   const getCustomers = async () => {
     const data = await GetAllCustomers()
     console.log(data)
@@ -15,6 +23,7 @@ const Customer = ({ authenticated, user }) => {
   }
   useEffect(() => {
     getCustomers()
+    getOrderPickup()
   }, [])
 
   return (
@@ -29,6 +38,10 @@ const Customer = ({ authenticated, user }) => {
                   address={customer?.customer_address}
                   email={customer?.customer_email}
                   //   onClick={() => viewTranscript(student?.id)}
+                />
+                <PickupCard
+                  pickup_date={customer?.pickup_date}
+                  customer_address={customer?.customer_address}
                 />
               </div>
             ))}
