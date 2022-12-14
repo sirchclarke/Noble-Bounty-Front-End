@@ -57,7 +57,7 @@ const OrderDetails = ({ user, authenticated }) => {
                 <input
                   className="input"
                   type="date"
-                  id="pickup_date"
+                  id="pickupId"
                   placeholder="Pickup Date"
                   onChange={(e) => handleChange(e)}
                   value={formState.pickupId}
@@ -68,7 +68,7 @@ const OrderDetails = ({ user, authenticated }) => {
                 </button>
               </form>
             ) : (
-              <button onClick={() => onClick(customers.id)}>
+              <button onClick={() => onClick(setPickups.pickup_date)}>
                 Update Pickup
               </button>
             )}

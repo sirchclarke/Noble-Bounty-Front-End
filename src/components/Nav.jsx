@@ -5,7 +5,7 @@ const Nav = ({ authenticated, user, handleLogOut }) => {
 
   const authenticatedOptions = (
     <nav>
-      <h3>Welcome!</h3>
+      
       <Link to='/orders'>Orders</Link>
       <Link to='/add-order'>Add Order</Link>
       <Link to='/customer'>Customers</Link>

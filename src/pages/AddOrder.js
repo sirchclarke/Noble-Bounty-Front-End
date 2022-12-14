@@ -73,6 +73,20 @@ const AddOrder = ({ user, authenticated }) => {
                 value={formValues.order_date}
                 required
               />
+              <label className="label orderField" htmlFor="orderDate">
+                Order Date:
+              </label>
+              <input
+                className="input"
+                type="date"
+                id="order_date"
+                placeholder="Order Date"
+                image="image"
+                cols="30"
+                onChange={handleChange}
+                value={formValues.order_date}
+                required
+              />
               <label className="label orderField" htmlFor="item_type">
                 Item Type:
               </label>
