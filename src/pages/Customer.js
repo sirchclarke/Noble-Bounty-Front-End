@@ -10,36 +10,26 @@ import ViewCustomers from '../components/ViewCustomers'
 import { Link } from 'react-router-dom'
 
 const Customer = ({ authenticated, user }) => {
-  let { customerId } = useParams()
-  const [customers, setCustomers] = useState([null])
-  const [pickup, setPickup] = useState([null])
   let navigate = useNavigate()
+  const [customers, setCustomers] = useState([])
 
-  const getOrderPickup = async () => {
-    const data = await GetPickup()
-    console.log(data)
-    setPickup(data)
-  }
-  const getCustomers = async () => {
+  // const getOrderPickup = async () => {
+  //   const data = await GetPickup()
+  //   console.log(data)
+  //   setPickup(data)
+  // }
+  const showAllCustomers = async () => {
     const data = await GetAllCustomers()
-    console.log(data)
     setCustomers(data)
+    console.log(data)
   }
-  const handleDelete = async () => {
-    await DeleteCustomer({ customerId })
-    setCustomers()
+  const handleDelete = async (id) => {
+    await DeleteCustomer(id)
+    showAllCustomers()
   }
-  // const removeCustomer = async (id) => {
-  //       const data = await DeleteCustomer
-  //       console.log(data)
-  //     } catch (error) {
-  //         throw (error)
-
-  //     }
 
   useEffect(() => {
-    getCustomers()
-    getOrderPickup()
+    showAllCustomers()
   }, [])
 
   return (
@@ -49,15 +39,15 @@ const Customer = ({ authenticated, user }) => {
           <div className="customers">
             {customers?.map((customer) => (
               <div key={customer?.id}>
-                <CustomerCard
+                <ViewCustomers
                   key={customer?.id}
                   name={customer?.customer_name}
                   address={customer?.customer_address}
                   email={customer?.customer_email}
-                  deleteOrder={handleDelete}
+                  deleteCustomer={handleDelete}
                   //   onClick={() => viewTranscript(student?.id)}
                 />
-                <div>
+                {/* <div>
                   {customers?.map((customer) => (
                     <Link to={`/customers/${customer?._id}`}>
                       <ViewCustomers
@@ -67,8 +57,8 @@ const Customer = ({ authenticated, user }) => {
                       />{' '}
                       deleteOrder={handleDelete}
                     </Link>
-                  ))}
-                </div>
+                //   ))}
+                </div> */}
                 <PickupCard
                   key={customer?.id}
                   pickup_date={customer?.pickup_date}

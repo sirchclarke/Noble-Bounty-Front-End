@@ -26,7 +26,7 @@ const OrderDetails = ({ user, authenticated }) => {
   return (
     <OrderForm
       key={order?.id}
-      id={order?.id}
+      id={order?.order_id}
       date={order?.order_date}
       order_type={order?.item_type}
       address={order?.customer_address}

@@ -20,12 +20,12 @@ const Home = ({ user, authenticated, setUser, toggleAuthenticated }) => {
     <div className="home-container col">
       {user && authenticated ? (
         <div>
-          <p className="welcome">Welcome!</p>
+          <p className="welcome">Noble Bounty</p>
         </div>
       ) : (
         <div>
-          <h1 className="welcome-message">Welcome</h1>
-          <h3>Register or Sign-In to view your Orders and Pickups</h3>
+          <h1 className="welcome-message">Noble Bounty PickUp Directory</h1>
+          <h3>Register or Sign-In to view Orders and Pickups</h3>
           <section className="welcome-signin">
             <button onClick={() => navigate('/login')}>
               {' '}

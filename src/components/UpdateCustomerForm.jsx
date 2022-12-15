@@ -36,7 +36,7 @@ const handleChange = (e) => {
 
     
     return(
-        <div className='updatecontainer'>
+        <div className='transcript-container'>
     <h1>Update a Customer</h1>
     <form onSubmit={handleSubmit}>
       <input type="text" value={formState.name} onChange={handleChange} id={'name'} placeholder={'name'} />
