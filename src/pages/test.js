@@ -1,170 +1,136 @@
-// import * as React from 'react'
-// import Avatar from '@mui/material/Avatar'
-// import Button from '@mui/material/Button'
-// import CssBaseline from '@mui/material/CssBaseline'
-// import TextField from '@mui/material/TextField'
-// import FormControlLabel from '@mui/material/FormControlLabel'
-// import Checkbox from '@mui/material/Checkbox'
-// import Link from '@mui/material/Link'
-// import Grid from '@mui/material/Grid'
-// import Box from '@mui/material/Box'
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-// import Typography from '@mui/material/Typography'
-// import Container from '@mui/material/Container'
-// import { createTheme, ThemeProvider } from '@mui/material/styles'
-// import { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
-// import { RegisterUser } from '../services/AuthServices'
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-// const Register = ({ setUser, toggleAuthenticated }) => {
-//   let navigate = useNavigate()
-//   const [formValues, setFormValues] = useState({
-//     customer_name: '',
-//     customer_address: '',
-//     customer_email: '',
-//     password: '',
-//     confirmPassword: ''
-//   })
+const OrderForm = ({ id, user, authenticated, onSubmit }) => {
+  let navigate = useNavigate()
+  const [formValues, setFormValues] = useState({
+    customer_name: '',
+    id: user.id,
+    customer_id: id,
+    order_date: '',
+    item_type: '',
+    customer_address: '',
+    item_image: ''
+  })
 
-//   const theme = createTheme()
+  const handleChange = (e) => {
+    setFormValues({ ...formValues, [e.target.id]: e.target.value })
+  }
 
-//   const handleChange = (e) => {
-//     setFormValues({ ...formValues, [e.target.name]: e.target.value })
-//   }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    onSubmit({
+      customer_name: formValues.customer_name,
+      customer_id: formValues.customer_id,
+      order_date: formValues.customer_date,
+      item_type: formValues.item_type,
+      item_image: formValues.item_image
+    })
+    setFormValues({
+      customer_name: '',
+      customer_id: '',
+      order_date: '',
+      item_type: '',
+      item_image: ''
+    })
+    // const newOrder = await CreateOrder(formState)
+    // setFormState(initialState)
+    navigate(`/orders`)
+  }
+  return (
+    <div>
+      {authenticated && user ? (
+        <div>
+          <div className="order-form">
+            <h2>Add a new order</h2>
+            <form className="form search" onSubmit={handleSubmit}>
+              <label className="label orderField" htmlFor="name">
+                Name:
+              </label>
+              <input
+                className="input"
+                type="text"
+                id="customer_name"
+                placeholder="Customer Name"
+                image="image"
+                cols="30"
+                onChange={handleChange}
+                value={formValues.customer_name}
+                required
+              />
+    <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}
+      noValidate
+      autoComplete="off"
+    >
+     <div>
+        <TextField className="label orderField" htmlFor="name" />
+        Name:
+        <TextField
+       className="input"
+       type="text"
+       id="customer_name"
+       placeholder="Customer Name"
+       image="image"
+       cols="30"
+       onChange={handleChange}
+       value={formValues.customer_name}
+       required
+        />
+        <TextField className="label orderField" htmlFor="orderDate" />
+        Order Date:
+        <TextField
+       className="input"
+       type="date"
+       id="order_date"
+       placeholder="Order Date"
+       image="image"
+       cols="30"
+       onChange={handleChange}
+       value={formValues.order_date}
+       required
+        />
+        <TextField className="label orderField" htmlFor="item_type" />
+        Item Type:
+        <TextField
+        className="input"
+        type="text"
+        id="item_type"
+        placeholder="Item Type"
+        image="image"
+        cols="30"
+        onChange={handleChange}
+        value={formValues.item_type}
+        required
+        />
+        <TextField className="label orderField" htmlFor="item_image" />
+        Item Image:
+        <TextField
+       className="input"
+       type="text"
+       id="item_image"
+       placeholder="Item Image"
+       image="image"
+       cols="30"
+       onChange={handleChange}
+       value={formValues.item_image}
+       required
+        />
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault()
-//     await RegisterUser({
-//       customer_name: formValues.customer_name,
-//       customer_address: formValues.customer_address,
-//       customer_email: formValues.customer_email,
-//       customer_password: formValues.password
-//     })
-//     setFormValues({
-//       customer_name: '',
-//       customer_address: '',
-//       customer_email: '',
-//       password: '',
-//       confirmPassword: ''
-//     })
-//     navigate('/login')
-//   }
-
-//   return (
-//     <ThemeProvider theme={theme}>
-//       <Container component="main" maxWidth="xs">
-//         <CssBaseline />
-//         <Box
-//           sx={{
-//             marginTop: 8,
-//             display: 'flex',
-//             flexDirection: 'column',
-//             alignItems: 'center'
-//           }}
-//         >
-//           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-//             <LockOutlinedIcon />
-//           </Avatar>
-//           <Typography component="h1" variant="h5">
-//             Sign up
-//           </Typography>
-//           <Box
-//             component="form"
-//             noValidate
-//             onSubmit={handleSubmit}
-//             sx={{ mt: 3 }}
-//           >
-//             <Grid container spacing={2}>
-//               <Grid item xs={12} sm={6}>
-//                 <TextField
-//                   onChange={handleChange}
-//                   name="customer_name"
-//                   type="text"
-//                   placeholder="Amy Adams"
-//                   value={formValues.customer_name}
-//                   required
-//                   autoFocus
-//                 />
-//               </Grid>
-//               <Grid item xs={12} sm={6}>
-//                 <TextField
-//                   onChange={handleChange}
-//                   name="customer_address"
-//                   type="text"
-//                   placeholder="1011 sunny side Harlingen, Texas"
-//                   value={formValues.customer_address}
-//                 />
-//               </Grid>
-//               <Grid item xs={12}>
-//                 <TextField
-//                   required
-//                   fullWidth
-//                   onChange={handleChange}
-//                   name="customer_email"
-//                   type="email"
-//                   placeholder="example@example.com"
-//                   value={formValues.customer_email}
-//                   required
-//                   autoComplete="email"
-//                 />
-//               </Grid>
-//               <Grid item xs={12}>
-//                 <TextField
-//                   required
-//                   fullWidth
-//                   onChange={handleChange}
-//                   type="password"
-//                   name="password"
-//                   value={formValues.password}
-//                   required
-//                   autoComplete="new-password"
-//                 />
-//               </Grid>
-//               <Grid item xs={12}>
-//                 <TextField
-//                   required
-//                   fullWidth
-//                   onChange={handleChange}
-//                   type="password"
-//                   name="confirmPassword"
-//                   value={formValues.confirmPassword}
-//                   required
-//                   autoComplete="new-password"
-//                 />
-//               </Grid>
-//               <Grid item xs={12}>
-//                 <FormControlLabel
-//                   control={
-//                     <Checkbox value="allowExtraEmails" color="primary" />
-//                   }
-//                   label="I want to receive inspiration, marketing promotions and updates via email."
-//                 />
-//               </Grid>
-//             </Grid>
-//             <Button
-//               type="submit"
-//               fullWidth
-//               variant="contained"
-//               sx={{ mt: 3, mb: 2 }}
-//               disabled={
-//                 !formValues.customer_email ||
-//                 (!formValues.password &&
-//                   formValues.confirmPassword === formValues.password)
-//               }
-//             >
-//               Register
-//             </Button>
-//             <Grid container justifyContent="flex-end">
-//               <Grid item>
-//                 <Link href="#" variant="body2">
-//                   Already have an account? Sign in
-//                 </Link>
-//               </Grid>
-//             </Grid>
-//           </Box>
-//         </Box>
-//       </Container>
-//     </ThemeProvider>
-//   )
-// }
-// export default Register
+<button className="create-order-button" type="submit">
+                Create Order
+                </button>
+                
+                </box>
+                </form>
+          </div>
+        </div>
+      
+    
+    
+    </div>
+  );
+}
+export default OrderForm

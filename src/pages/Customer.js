@@ -6,6 +6,8 @@ import PickupCard from '../components/PickupCard'
 import { GetAllCustomers } from '../services/CustomerServices'
 import { DeleteCustomer } from '../services/CustomerServices'
 import { GetPickup } from '../services/PickupServices'
+import ViewCustomers from '../components/ViewCustomers'
+import { Link } from 'react-router-dom'
 
 const Customer = ({ authenticated, user }) => {
   let { customerId } = useParams()
@@ -52,8 +54,21 @@ const Customer = ({ authenticated, user }) => {
                   name={customer?.customer_name}
                   address={customer?.customer_address}
                   email={customer?.customer_email}
+                  deleteOrder={handleDelete}
                   //   onClick={() => viewTranscript(student?.id)}
                 />
+                <div>
+                  {customers?.map((customer) => (
+                    <Link to={`/customers/${customer?._id}`}>
+                      <ViewCustomers
+                        key={customer?._id}
+                        name={customer?.name}
+                        address={customer?.address}
+                      />{' '}
+                      deleteOrder={handleDelete}
+                    </Link>
+                  ))}
+                </div>
                 <PickupCard
                   key={customer?.id}
                   pickup_date={customer?.pickup_date}

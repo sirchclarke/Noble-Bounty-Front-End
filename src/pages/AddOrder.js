@@ -1,3 +1,6 @@
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -45,80 +48,68 @@ const OrderForm = ({ id, user, authenticated, onSubmit }) => {
           <div className="order-form">
             <h2>Add a new order</h2>
             <form className="form search" onSubmit={handleSubmit}>
-              <label className="label orderField" htmlFor="name">
-                Name:
-              </label>
-              <input
-                className="input"
-                type="text"
-                id="customer_name"
-                placeholder="Customer Name"
-                image="image"
-                cols="30"
-                onChange={handleChange}
-                value={formValues.customer_name}
-                required
-              />
+            <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}
+      noValidate
+      autoComplete="off"
+    >
+     <div>
+        <TextField className="label orderField" htmlFor="name" />
+        Name:
+        <TextField
+       className="input"
+       type="text"
+       id="customer_name"
+       placeholder="Customer Name"
+       image="image"
+       cols="30"
+       onChange={handleChange}
+       value={formValues.customer_name}
+       required
+        />
+        <TextField className="label orderField" htmlFor="orderDate" />
+        Order Date:
+        <TextField
+       className="input"
+       type="date"
+       id="order_date"
+       placeholder="Order Date"
+       image="image"
+       cols="30"
+       onChange={handleChange}
+       value={formValues.order_date}
+       required
+        />
+        <TextField className="label orderField" htmlFor="item_type" />
+        Item Type:
+        <TextField
+        className="input"
+        type="text"
+        id="item_type"
+        placeholder="Item Type"
+        image="image"
+        cols="30"
+        onChange={handleChange}
+        value={formValues.item_type}
+        required
+        />
+        <TextField className="label orderField" htmlFor="item_image" />
+        Item Image:
+        <TextField
+       className="input"
+       type="text"
+       id="item_image"
+       placeholder="Item Image"
+       image="image"
+       cols="30"
+       onChange={handleChange}
+       value={formValues.item_image}
+       required
+        />
 
-              <label className="label orderField" htmlFor="orderDate">
-                Order Date:
-              </label>
-              <input
-                className="input"
-                type="date"
-                id="order_date"
-                placeholder="Order Date"
-                image="image"
-                cols="30"
-                onChange={handleChange}
-                value={formValues.order_date}
-                required
-              />
-              <label className="label orderField" htmlFor="orderDate">
-                Order Date:
-              </label>
-              <input
-                className="input"
-                type="date"
-                id="order_date"
-                placeholder="Order Date"
-                image="image"
-                cols="30"
-                onChange={handleChange}
-                value={formValues.order_date}
-                required
-              />
-              <label className="label orderField" htmlFor="item_type">
-                Item Type:
-              </label>
-              <input
-                className="input"
-                type="text"
-                id="item_type"
-                placeholder="Item Type"
-                image="image"
-                cols="30"
-                onChange={handleChange}
-                value={formValues.item_type}
-                required
-              />
-              <label className="label orderField" htmlFor="item_image">
-                Item Image:
-              </label>
-              <input
-                className="input"
-                type="text"
-                id="item_image"
-                placeholder="Item Image"
-                image="image"
-                cols="30"
-                onChange={handleChange}
-                value={formValues.item_image}
-                required
-              />
               <button className="create-order-button" type="submit">
                 Create Order
               </button>
+              </box>
             </form>
           </div>
         </div>
