@@ -1,7 +1,8 @@
 import React from 'react'
 
 
-const OrderCard = ({date,order_type,viewOnClick,address,item_image}) => {
+
+const OrderCard = ({date,order_type,viewOnClick,address,item_image,id,deleteOrder}) => {
   return(
     <div className= "order-card" >
         <div className= "order-info">
@@ -11,6 +12,8 @@ const OrderCard = ({date,order_type,viewOnClick,address,item_image}) => {
             <h3 className="name-display">Item: {item_image}</h3>
      
             <button onClick={viewOnClick}>View order details</button>
+            <button onClick={()=> deleteOrder(id)}>Delete</button>
+            {/* <button onClick={()=> DeleteOrder()}>Delete</button> */}
         </div>
     </div>
 )

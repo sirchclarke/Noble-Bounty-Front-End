@@ -1,12 +1,14 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import CustomerCard from '../components/CustomerCard'
 import PickupCard from '../components/PickupCard'
 import { GetAllCustomers } from '../services/CustomerServices'
+import { DeleteCustomer } from '../services/CustomerServices'
 import { GetPickup } from '../services/PickupServices'
 
 const Customer = ({ authenticated, user }) => {
+  let { customerId } = useParams()
   const [customers, setCustomers] = useState([null])
   const [pickup, setPickup] = useState([null])
   let navigate = useNavigate()
@@ -21,6 +23,18 @@ const Customer = ({ authenticated, user }) => {
     console.log(data)
     setCustomers(data)
   }
+  const handleDelete = async () => {
+    await DeleteCustomer({ customerId })
+    setCustomers()
+  }
+  // const removeCustomer = async (id) => {
+  //       const data = await DeleteCustomer
+  //       console.log(data)
+  //     } catch (error) {
+  //         throw (error)
+
+  //     }
+
   useEffect(() => {
     getCustomers()
     getOrderPickup()
@@ -34,12 +48,14 @@ const Customer = ({ authenticated, user }) => {
             {customers?.map((customer) => (
               <div key={customer?.id}>
                 <CustomerCard
+                  key={customer?.id}
                   name={customer?.customer_name}
                   address={customer?.customer_address}
                   email={customer?.customer_email}
                   //   onClick={() => viewTranscript(student?.id)}
                 />
                 <PickupCard
+                  key={customer?.id}
                   pickup_date={customer?.pickup_date}
                   customer_address={customer?.customer_address}
                 />
@@ -65,4 +81,5 @@ const Customer = ({ authenticated, user }) => {
     </div>
   )
 }
+
 export default Customer

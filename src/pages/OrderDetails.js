@@ -1,96 +1,40 @@
 import { useState, useEffect } from 'react'
-import { GetOrderById } from '../services/OrderServices'
+import { GetOrderById, UpdateOrderById } from '../services/OrderServices'
 import { useParams, useNavigate } from 'react-router-dom'
-import { UpdatePickup } from '../services/PickupServices'
-import Orders from './Orders'
+import OrderForm from './AddOrder'
 
 const OrderDetails = ({ user, authenticated }) => {
   let { id } = useParams()
   let navigate = useNavigate()
+  const [order, setOrder] = useState({})
 
-  const initialState = {
-    orderId: id,
-    pickup: ''
-  }
-  const [formState, setFormState] = useState(initialState)
-  const [customers, setCustomers] = useState({})
-  const [pickups, setPickups] = useState(null)
-  const [customerToEdit, setCustomerToEdit] = useState()
+  const handleSubmit = async (updatedOrder) => {
+    UpdateOrderById(id, updatedOrder)
 
-  const handleChange = (e) => {
-    setFormState({ ...formState, [e.target.id]: e.target.value })
+    setOrder(updatedOrder)
   }
-  const getCustomerInOrder = async (req, res) => {
-    const customerInOrder = await GetOrderById(id)
-    setCustomers(customerInOrder)
-  }
-  const handleSubmit = async (e, id) => {
-    e.preventDefault()
-    await UpdatePickup({ ...formState, pickupId: id })
-    setFormState(initialState)
-    setCustomerToEdit(null)
-    getCustomerInOrder()
-    setPickups()
-  }
-  const onClick = (id) => {
-    setCustomerToEdit(id)
+
+  const showOrder = async () => {
+    const data = await GetOrderById()
+    setOrder(data)
+    console.log(data)
   }
   useEffect(() => {
-    getCustomerInOrder()
+    showOrder()
   }, [])
 
   return (
-    <div>
-      {authenticated && user ? (
-        <div>
-          <p className="details-header">Order Details</p>
-
-          <div className="order-customers" key={customers?.id}>
-            <p className="order-customers">{customers?.customer_address}</p>
-            <p className="order-customers">{customers?.item_type}</p>
-            <p className="order-customers">{customers?.pickup_date}</p>
-            {/* <p>{pickups?.pickup_date}</p> */}
-            {customerToEdit === customers?.id ? (
-              <form
-                className="form"
-                onSubmit={(e) => handleSubmit(e, customers.id)}
-              >
-                <input
-                  className="input"
-                  type="date"
-                  id="pickupId"
-                  placeholder="Pickup Date"
-                  onChange={(e) => handleChange(e)}
-                  value={formState.pickupId}
-                  // required
-                />
-                <button className="create-order-button" type="submit">
-                  Update Pickup
-                </button>
-              </form>
-            ) : (
-              <button onClick={() => onClick(setPickups.pickup_date)}>
-                Update Pickup
-              </button>
-            )}
-          </div>
-        </div>
-      ) : (
-        <div className="home-container col">
-          <h1 className="welcome-message">Welcome</h1>
-          <h3>Register or Sign-In to view your orders and pickups</h3>
-          <section className="welcome-signin">
-            <button onClick={() => navigate('/login')}>
-              {' '}
-              Click here to Log-In
-            </button>
-            <button onClick={() => navigate('/register')}>
-              Click here to Register
-            </button>
-          </section>
-        </div>
-      )}
-    </div>
+    <OrderForm
+      key={order?.id}
+      id={order?.id}
+      name={order?.customer_name}
+      date={order?.order_date}
+      address={order?.customer_address}
+      order_type={order?.item_type}
+      item_image={order?.item_image}
+      onSubmit={handleSubmit}
+    />
   )
 }
+
 export default OrderDetails

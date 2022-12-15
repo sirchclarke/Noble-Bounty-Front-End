@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import OrderCard from '../components/OrderCard'
 import { GetAllOrders } from '../services/OrderServices'
+import { DeleteOrder } from '../services/OrderServices'
 
 const Orders = ({ user, authenticated }) => {
   let navigate = useNavigate()
@@ -11,6 +12,11 @@ const Orders = ({ user, authenticated }) => {
     const data = await GetAllOrders()
     setOrders(data)
     console.log(data)
+  }
+
+  const handleDelete = async (id) => {
+    await DeleteOrder(id)
+    showAllOrders()
   }
 
   useEffect(() => {
@@ -28,12 +34,14 @@ const Orders = ({ user, authenticated }) => {
           {orders?.map((order) => (
             <OrderCard
               key={order?.id}
-              id={order?.customer_name}
+              id={order?.id}
+              name={order?.customer_name}
               date={order?.order_date}
               address={order?.customer_address}
               order_type={order?.item_type}
               item_image={order?.item_image}
               viewOnClick={() => viewDetails(order?.id)}
+              deleteOrder={handleDelete}
             />
           ))}
         </div>

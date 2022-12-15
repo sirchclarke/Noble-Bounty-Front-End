@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CreateOrder } from '../services/OrderServices'
 
-const AddOrder = ({ user, authenticated }) => {
+const OrderForm = ({ user, authenticated, onSubmit }) => {
   let navigate = useNavigate()
   const [formValues, setFormValues] = useState({
     customer_name: '',
@@ -18,7 +17,7 @@ const AddOrder = ({ user, authenticated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await CreateOrder({
+    onSubmit({
       customer_name: formValues.customer_name,
       customer_id: formValues.customer_id,
       order_date: formValues.customer_date,
@@ -140,4 +139,4 @@ const AddOrder = ({ user, authenticated }) => {
   )
 }
 
-export default AddOrder
+export default OrderForm
