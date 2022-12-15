@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const OrderForm = ({ user, authenticated, onSubmit }) => {
+const OrderForm = ({ id, user, authenticated, onSubmit }) => {
   let navigate = useNavigate()
   const [formValues, setFormValues] = useState({
     customer_name: '',
-    customer_id: user.id,
+    id: user.id,
+    customer_id: id,
     order_date: '',
     item_type: '',
+    customer_address: '',
     item_image: ''
   })
 

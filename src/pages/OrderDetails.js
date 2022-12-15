@@ -27,10 +27,9 @@ const OrderDetails = ({ user, authenticated }) => {
     <OrderForm
       key={order?.id}
       id={order?.id}
-      name={order?.customer_name}
       date={order?.order_date}
-      address={order?.customer_address}
       order_type={order?.item_type}
+      address={order?.customer_address}
       item_image={order?.item_image}
       onSubmit={handleSubmit}
     />
