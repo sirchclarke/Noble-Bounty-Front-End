@@ -21,7 +21,7 @@ const UpdateCustomerForm =(props)=>{
     let navigate=useNavigate()
 const handleSubmit=async(e)=>{
     e.preventDefault()
-    await axios.put(`/customer/${customerId}`,formState)
+    await axios.put(`/customers/${customerId}`,formState)
     setFormState(initialList)
     navigate('/customers')
 }
