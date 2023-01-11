@@ -1,8 +1,8 @@
-import axios from 'axios'
+// import axios from 'axios'
 import React from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+// import { Navigate, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { DeleteCustomer } from '../services/CustomerServices'
+// import { DeleteCustomer } from '../services/CustomerServices'
 
 
 

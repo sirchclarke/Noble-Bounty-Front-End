@@ -1,13 +1,13 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import CustomerCard from '../components/CustomerCard'
+// import CustomerCard from '../components/CustomerCard'
 import PickupCard from '../components/PickupCard'
 import { GetAllCustomers } from '../services/CustomerServices'
 import { DeleteCustomer } from '../services/CustomerServices'
-import { GetPickup } from '../services/PickupServices'
+// import { GetPickup } from '../services/PickupServices'
 import ViewCustomers from '../components/ViewCustomers'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 const Customer = ({ authenticated, user }) => {
   let navigate = useNavigate()
